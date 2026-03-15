@@ -1,7 +1,7 @@
 databaseChangeLog:
   - include:
-      file: db/changelog/release/v1.0.0.yaml
+      file: db/changelog/releases/v1.0.0.yaml
   - include:
-      file: db/changelog/release/v1.1.0.yaml
+      file: db/changelog/releases/v1.1.0.yaml
   - include:
-      file: db/changelog/release/v1.2.0.yaml
+      file: db/changelog/releases/v1.2.0.yaml

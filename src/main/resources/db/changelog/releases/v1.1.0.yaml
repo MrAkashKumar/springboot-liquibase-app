@@ -7,7 +7,6 @@ databaseChangeLog:
         - tagDatabase:
             tag: v1.1.0
 
-  # Includes for dependent changelogs (features)
   - include:
       file: db/changelog/features/employee/002-add-score-id.yaml
   - include:

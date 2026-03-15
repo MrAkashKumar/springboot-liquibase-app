@@ -1,4 +1,4 @@
 ID,NAME,PHONE,EMAIL,UNDER_SURVEILLANCE,CRIMINAL_RECORD
 1,Alice,+65-91001122,akash@referralszone.com,false,false
-2.Akash,+65-89863487,akash@classifyconnect.com,false,false
-3.charle,+65-2384843,charle@example.com,true,flase
+2,Akash,+65-89863487,akash@classifyconnect.com,false,false
+3,charle,+65-2384843,charle@example.com,true,false
