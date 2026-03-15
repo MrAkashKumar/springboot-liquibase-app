@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: common-001-create-flags
+      author: Akash
+      changes:
+        - createTable:
+            tableName: FLAGS
+            columns:
+              - column:
+                  name: ID
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: NAME
+                  type: VARCHAR(64)
+      rollback:
+        - dropTable:
+            tableName: FLAGS
+            cascadeConstraints: true

@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: accounts-001-create
+      author: Akash
+      changes:
+        - createTable:
+            tableName: ACCOUNTS
+            columns:
+              - column:
+                  name: ID
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: EMPLOYEE_ID
+                  type: BIGINT
+              - column:
+                  name: ACCOUNT_NUMBER
+                  type: VARCHAR(32)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: BALANCE
+                  type: DECIMAL(19,2)
+      rollback:
+        - dropTable:
+            tableName: ACCOUNTS
+            cascadeConstraints: true

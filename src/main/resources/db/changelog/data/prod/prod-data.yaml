@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: prod-baseline-flags
+      author: Akash
+      context: prod
+      preConditions:
+        - onFail: MARK_RAN
+        - tableExists:
+            tableName: FLAGS
+      changes:
+        - loadData:
+            file: db/changelog/data/prod/baseline-flags.csv
+            tableName: FLAGS
+            separator: ','
+            quotchar: '"'
+            encoding: UTF-8
+      rollback:
+        - delete:
+            tableName: FLAGS

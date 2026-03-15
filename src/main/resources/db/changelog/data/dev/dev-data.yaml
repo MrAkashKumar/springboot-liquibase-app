@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: dev-extra-accounts
+      author: Akash
+      context: dev
+      preConditions:
+        - onFail: MARK_RAN
+        - tableExists:
+            tableName: ACCOUNTS
+      changes:
+        - loadData:
+            file: db/changelog/data/dev/sample-users.csv
+            tableName: ACCOUNTS
+            separator: ','
+            quotchar: '"'
+            encoding: UTF-8
+      rollback:
+        - delete:
+            tableName: ACCOUNTS
