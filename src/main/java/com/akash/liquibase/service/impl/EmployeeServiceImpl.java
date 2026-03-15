@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.List;
 
 /**
  * @author Akash Kumar
@@ -47,5 +48,17 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeResponse.setEmail(employeeRequest.getEmail());
 
         return employeeResponse;
+    }
+
+    @Override
+    public List<EmployeeResponse> getEmployee() {
+        String sql = "SELECT NAME, PHONE, EMAIL FROM EMPLOYEE";
+        return jdbcTemplate.query(sql, (rs, rowNum) -> {
+            EmployeeResponse response = new EmployeeResponse();
+            response.setName(rs.getString("NAME"));
+            response.setPhone(rs.getString("PHONE"));
+            response.setEmail(rs.getString("EMAIL"));
+            return response;
+        });
     }
 }

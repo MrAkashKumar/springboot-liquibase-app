@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author Akash Kumar
  */
@@ -30,7 +32,7 @@ public class EmployeeController {
 
     @GetMapping(value = "/api/v1/employee")
     public ResponseEntity<Object> getEmployee(){
-        EmployeeResponse employeeResponse = new EmployeeResponse();
+        List<EmployeeResponse> employeeResponse = employeeService.getEmployee();
         return new ResponseEntity<>(employeeResponse, HttpStatus.OK);
     }
 }
