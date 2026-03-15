@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: employee-001-create
+      author: Akash
+      changes:
+        - createTable:
+            tableName: EMPLOYEE
+            columns:
+              - column:
+                  name: ID
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: NAME
+                  type: VARCHAR(250)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: PHONE
+                  type: VARCHAR(50)
+              - column:
+                  name: EMAIL
+                  type: VARCHAR(50)
+              - column:
+                  name: UNDER_SURVEILLANCE
+                  type: BOOLEAN
+              - column:
+                  name: CRIMINAL_RECORD
+                  type: BOOLEAN
+      rollback:
+        - dropTable:
+            tableName: EMPLOYEE
+            cascadeConstraints: true

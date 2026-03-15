@@ -4,7 +4,7 @@ databaseChangeLog:
       author: Akash
       preConditions:
         - onFail: MARK_RAN
-          tableExists:
+        - tableExists:
             tableName: EMPLOYEE
       changes:
         - createIndex:
@@ -19,7 +19,7 @@ databaseChangeLog:
       author: Akash
       preConditions:
         - onFail: MARK_RAN
-          tableExists:
+        - tableExists:
             tableName: ACCOUNTS
       changes:
         - createIndex:

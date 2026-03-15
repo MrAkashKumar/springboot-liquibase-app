@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: tag-v1.0.0
+      author: release-bot
+      changes:
+        - tagDatabase:
+            tag: v1.0.0
+
+  - include:
+      file: db/changelog/features/employee/001-create-employee.yaml
+#  - include:
+#      file: db/changelog/features/employee/002-add-score-id.yaml
+  - include:
+      file: db/changelog/features/accounts/001-create-accounts.yaml
+  - include:
+      file: db/changelog/util/indexes.yaml
+  - include:
+      file: db/changelog/util/constraints.yaml
+  - include:
+      file: db/changelog/data/common/common-data.yaml

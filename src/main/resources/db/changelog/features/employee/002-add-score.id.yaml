@@ -1,0 +1,60 @@
+databaseChangeLog:
+  # Guard: Operate only if employee table exists
+  - changeSet:
+      id: employee-002-guard
+      author: Akash
+      preConditions:
+        - onFail: MARK_RAN
+        - onError: MARK_RAN
+        - tableExists:
+            tableName: EMPLOYEE
+      changes:
+        - sql: SELECT 1
+      rollback:
+        - sql: SELECT 1
+
+  # Add EID if missing
+  - changeSet:
+      id: employee-002-add-eid-if-missing
+      author: Akash
+      preConditions:
+        - onFail: CONTINUE
+        - onError: CONTINUE
+        - not:
+            - columnExists:
+                tableName: EMPLOYEE
+                columnName: EID
+      changes:
+        - addColumn:
+            tableName: EMPLOYEE
+            columns:
+              - column:
+                  name: EID
+                  type: NUMBER(5)
+      rollback:
+        - dropColumn:
+            tableName: EMPLOYEE
+            columnName: EID
+
+  # Ensure EID data type
+
+  - changeSet:
+      id: employee-002-ensure-eid-type
+      author: Akash
+      preConditions:
+        - onFail: CONTINUE
+        - onError: CONTINUE
+        - columnExists:
+            tableName: EMPLOYEE
+            columnName: EID
+      changes:
+        - modifyDataType:
+            tableName: EMPLOYEE
+            columnName: EID
+            newDataType: NUMBER(5)
+      rollback:
+        - modifyDataType:
+            tableName: EMPLOYEE
+            columnName: EID
+            newDataType: NUMBER(10) # <--- put the prior type here if known; or use MARK_RAN if unknown
+

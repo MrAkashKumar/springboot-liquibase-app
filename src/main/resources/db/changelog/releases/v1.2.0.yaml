@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - changeSet:
+      id: tag-v1.2.0
+      author: release-bot
+      changes:
+        - tagDatabase:
+            tag: v1.2.0
+
+#example table deletion (DDL) with rollback
+
+  - changeSet:
+      id: drop-flags-table
+      author: Akash
+      preConditions:
+        - onFail: MARK_RAN
+        - tableExists:
+            tableName: FLAGS
+      changes:
+        - dropTable:
+            tableName: FLAGS
+            cascadeConstraints: true
+      rollback:
+        - createTable:
+            tableName: FLAGS
+            columns:
+              - column:
+                  name: ID
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: NAME
+                  type: VARCHAR(64)

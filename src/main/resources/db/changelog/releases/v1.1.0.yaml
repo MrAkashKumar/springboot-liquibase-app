@@ -1,0 +1,47 @@
+databaseChangeLog:
+  # Tag version v1.1.0
+  - changeSet:
+      id: tag-v1.1.0
+      author: release-bot
+      changes:
+        - tagDatabase:
+            tag: v1.1.0
+
+  # Includes for dependent changelogs (features)
+  - include:
+      file: db/changelog/features/employee/002-add-score-id.yaml
+  - include:
+      file: db/changelog/features/common/001-create-flags.yaml
+
+  # DQL: Create a view joining EMPLOYEE and ACCOUNTS
+  - changeSet:
+      id: view-employee-accounts
+      author: Akash
+      preConditions:
+        - onFail: MARK_RAN
+        - tableExists:
+            tableName: EMPLOYEE
+        - tableExists:
+            tableName: ACCOUNTS
+      changes:
+        - createView:
+            viewName: EMPLOYEE_ACCOUNT_VIEW
+            replaceIfExists: true
+            fullDefinition: false
+            selectQuery: |
+              SELECT e.ID AS EMPLOYEE_ID, e.NAME AS EMPLOYEE_NAME,
+                a.ACCOUNT_NUMBER,
+                a.BALANCE
+              FROM EMPLOYEE e
+              LEFT JOIN ACCOUNTS a ON a.EMPLOYEE_ID = e.ID
+      rollback:
+        - dropView:
+            viewName: EMPLOYEE_ACCOUNT_VIEW
+
+  # Env-specific seed data by Liquibase contexts
+  - include:
+      file: db/changelog/data/dev/dev-data.yaml
+  - include:
+      file: db/changelog/data/uat/uat-data.yaml
+  - include:
+      file: db/changelog/data/prod/prod-data.yaml
