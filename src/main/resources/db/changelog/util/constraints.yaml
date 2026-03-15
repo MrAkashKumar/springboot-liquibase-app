@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: fk-accounts-employee
+      author: Akash
+      preConditions:
+        onFail: MARK_RAN
+          - tableExists:
+              tableName: ACCOUNTS
+          - tableExists:
+              tableName: EMPLOYEE
+          - columnExists:
+              tableName: ACCOUNTS
+              columnName: EMPLOYEE_ID
+          - columnExists:
+              tableName: EMPLOYEE
+              columnName: ID
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: ACCOUNTS
+            baseColumnNames: EMPLOYEE_ID
+            constraintName: FK_ACCOUNTS_EMPLOYEE
+            referencedTableName: EMPLOYEE
+            referencedColumnNames: ID
+            onDelete: CASCADE
+            onUpdate: RESTRICT

@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: indexes-employee-name
+      author: Akash
+      preConditions:
+        - onFail: MARK_RAN
+          tableExists:
+            tableName: EMPLOYEE
+      changes:
+        - createIndex:
+            indexName: IDX_EMPLOYEE_NAME
+            tableName: EMPLOYEE
+            columns:
+              - column:
+                  name: NAME
+
+  - changeSet:
+      id: indexes-accounts-account-number
+      author: Akash
+      preConditions:
+        - onFail: MARK_RAN
+          tableExists:
+            tableName: ACCOUNTS
+      changes:
+        - createIndex:
+            indexName:  IDX_ACCOUNTS_ACCOUNT_NUMBER
+            tableName:  ACCOUNTS
+            unique: true
+            columns:
+              - column:
+                  name: ACCOUNT_NUMBER
